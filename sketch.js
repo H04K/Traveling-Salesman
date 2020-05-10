@@ -1,15 +1,16 @@
-let bubbles = [];
+let villes = [];
 let maxDistance;
 let tempd = 0;
 let d;
+let test = 0;
 
 function setup() {
   createCanvas(1280, 720);
-  let init = new Bubble(100, 20, 50);
-  let init2 = new Bubble(10, 200, 50);
-  bubbles.push(init, init2);
+  let init = new Ville(100, 20, 50);
+  let init2 = new Ville(10, 200, 50);
+  villes.push(init, init2);
 
-  meilleurParcours = bubbles.slice();
+  meilleurParcours = villes.slice();
 }
 
 
@@ -17,13 +18,13 @@ function setup() {
 function draw() {
     
     
-  if (bubbles.length > 2) {
-
-    d = calc(bubbles);
+  if (villes.length > 2) {
+    test++
+    d = calc(villes);
     if (d < maxDistance) {
       maxDistance = d;
       console.log("Distance maximum " + maxDistance);
-      meilleurParcours = bubbles.slice();
+      meilleurParcours = villes.slice();
 
 
     }
@@ -33,14 +34,14 @@ function draw() {
   fill(255);
   stroke(200);
   strokeWeight(1);
-  for (let i = 0; i < bubbles.length; i++) {
+  for (let i = 0; i < villes.length; i++) {
 
-    //bubbles[i].show();
-    ellipse(bubbles[i].x, bubbles[i].y, 8, 8)
+    //villes[i].show();
+    ellipse(villes[i].x, villes[i].y, 8, 8)
   }
   beginShape();
-  for (let i = 0; i < bubbles.length; i++) {
-    vertex(bubbles[i].x, bubbles[i].y)
+  for (let i = 0; i < villes.length; i++) {
+    vertex(villes[i].x, villes[i].y)
     noFill();
   }
   
@@ -49,39 +50,45 @@ function draw() {
   strokeWeight(3);
   beginShape();
 
-  for (let i = 0; i < bubbles.length; i++) {
+  for (let i = 0; i < villes.length; i++) {
     vertex(meilleurParcours[i].x, meilleurParcours[i].y)
     noFill();
   }
   endShape();
-  let y = floor(random(bubbles.length));
-  let j = floor(random(bubbles.length));
-  mel(bubbles, y, j);
+  let y = floor(random(villes.length));
+  let j = floor(random(villes.length));
+  mel(villes, y, j);
   
   noStroke();
-  textSize(45)
+ textSize(20)
   fill(255);
   
-  text("Distance =  " + Math.round(maxDistance),11, 700);
-  
+text("Plus court  =  " + arrondir(maxDistance,4),11, 700);
+text('Distance en test = ' + arrondir(d,4),11,650)
 
+text('Nombre de test  = ' + test,1000,700)
+text('Nombre de point  = ' + villes.length,1000,650)
 
 
 
 }
 
-
+function arrondir(nombre, dec)
+{
+  let nombre_signe = nombre >= 0 ? 1 : -1;
+  return (Math.round((nombre*Math.pow(10,dec))+(nombre_signe*0.0001))/Math.pow(10,dec)).toFixed(dec);
+}
 function mousePressed() {
-
-  let b = new Bubble(mouseX, mouseY, 50);
-  bubbles.push(b);
-  d = calc(bubbles);
+  test =0;
+  let b = new Ville(mouseX, mouseY, 50);
+  villes.push(b);
+  d = calc(villes);
   maxDistance = 100000000;
 
 
 
 }
-class Bubble {
+class Ville {
   constructor(x, y, r) {
     this.x = x;
     this.y = y;
