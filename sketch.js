@@ -8,14 +8,8 @@ function setup() {
   let init = new Bubble(100, 20, 50);
   let init2 = new Bubble(10, 200, 50);
   bubbles.push(init, init2);
-  maxDistance = 1111120;
+
   meilleurParcours = bubbles.slice();
-
-
-
-
-
-
 }
 
 
