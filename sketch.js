@@ -33,7 +33,7 @@ function draw() {
   background(0);
   fill(255);
   stroke(200);
-  strokeWeight(1);
+  strokeWeight(0.5);
   for (let i = 0; i < villes.length; i++) {
 
     //villes[i].show();
@@ -47,7 +47,7 @@ function draw() {
   
   endShape();
   stroke(255, 0, 255);
-  strokeWeight(3);
+  strokeWeight(4);
   beginShape();
 
   for (let i = 0; i < villes.length; i++) {
@@ -79,13 +79,12 @@ function arrondir(nombre, dec)
   return (Math.round((nombre*Math.pow(10,dec))+(nombre_signe*0.0001))/Math.pow(10,dec)).toFixed(dec);
 }
 function mousePressed() {
+
   test =0;
   let b = new Ville(mouseX, mouseY, 50);
   villes.push(b);
   d = calc(villes);
   maxDistance = 100000000;
-
-
 
 }
 class Ville {
