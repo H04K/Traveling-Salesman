@@ -3,8 +3,9 @@ let maxDistance;
 let tempd = 0;
 let d;
 let test = 0;
-
+let time;
 function setup() {
+  
   createCanvas(1280, 720);
   let init = new Ville(100, 20, 50);
   let init2 = new Ville(10, 200, 50);
@@ -29,7 +30,7 @@ function draw() {
 
     }
   }
-
+  time = millis()
   background(0);
   fill(255);
   stroke(200);
@@ -70,6 +71,7 @@ function draw() {
   fill(255)
   text('Nombre de test  = ' + test, 1000, 700)
   text('Nombre de point  = ' + villes.length, 1000, 650)
+  text('temps  = ' + arrondir(time/1000,2), 1000, 500);
 
 
 
